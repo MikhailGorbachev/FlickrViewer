@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.mg.flickrviewer.databinding.RecentPhotosFragmentBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RecentPhotosFragment : Fragment() {
@@ -25,9 +28,24 @@ class RecentPhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val listAdapter = PhotosDataAdapter()
+
         binding?.run {
-            button.setOnClickListener {
-                openDetails()
+            photoList.apply {
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = listAdapter
+            }
+
+            swiperefresh.setOnRefreshListener {
+                listAdapter.refresh()
+            }
+
+            viewModel.photoList.observe(viewLifecycleOwner) {
+                swiperefresh.isRefreshing = false
+
+                lifecycleScope.launch {
+                    listAdapter.submitData(it)
+                }
             }
         }
     }

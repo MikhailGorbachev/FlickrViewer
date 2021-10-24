@@ -45,6 +45,8 @@ ext.koin_version = "2.0.1"
 ext.retrofit_version = '2.9.0'
 ext.navigation_verion = '2.3.5'
 ext.lifecycle_version = '2.3.1'
+ext.picasso_version = '2.71828'
+ext.paging_version = '3.0.1'
 
 dependencies {
 
@@ -57,6 +59,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_verion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_verion"
 
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
@@ -67,6 +71,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
