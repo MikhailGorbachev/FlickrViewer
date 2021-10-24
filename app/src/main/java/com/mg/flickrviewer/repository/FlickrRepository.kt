@@ -16,10 +16,13 @@ class FlickrRepository(private val flickrService: FlickrService) {
         return PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = false)
     }
 
-    fun recentPhotosFlow(pagingConfig: PagingConfig = getDefaultPageConfig()): LiveData<PagingData<FlickrPhoto>> {
+    fun searchPhotosFlow(
+        searchText: String,
+        pagingConfig: PagingConfig = getDefaultPageConfig()
+    ): LiveData<PagingData<FlickrPhoto>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { PhotoPagingSource(flickrService) }
+            pagingSourceFactory = { PhotoPagingSource(flickrService, searchText) }
         ).liveData
     }
 

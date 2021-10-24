@@ -15,7 +15,7 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "FLICKR_URL", "\"https://api.flickr.com\""
-        buildConfigField "String", "FLICKR_KEY", "\"c808377d153b42ee1cd56bff100c664b\""
+        buildConfigField "String", "FLICKR_KEY", "\"c808377d153b42ee1cd56bff100c664b\"" //TODO Need to be extracted on CI Level
         buildConfigField "String", "FLICKR_SECRET", "\"d29f9a89ddec96ec\""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
