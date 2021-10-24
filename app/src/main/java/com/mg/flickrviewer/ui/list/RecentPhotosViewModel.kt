@@ -1,12 +1,22 @@
 package com.mg.flickrviewer.ui.list
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.mg.flickrviewer.api.FlickrPhoto
 import com.mg.flickrviewer.repository.FlickrRepository
 
-class RecentPhotosViewModel(flickrRepository: FlickrRepository) : ViewModel() {
+class RecentPhotosViewModel(private val flickrRepository: FlickrRepository) : ViewModel() {
 
-    val photoList = flickrRepository.recentPhotosFlow().cachedIn(viewModelScope)
+    private val searchText = MutableLiveData<String>()
+
+    val photoList: LiveData<PagingData<FlickrPhoto>> = searchText.switchMap { query ->
+        flickrRepository.searchPhotosFlow(query).cachedIn(viewModelScope)
+    }
+
+    fun search(query: String) {
+        searchText.value = query
+    }
+
 
 }

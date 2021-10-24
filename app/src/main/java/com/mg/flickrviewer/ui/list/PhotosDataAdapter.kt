@@ -2,14 +2,18 @@ package com.mg.flickrviewer.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.mg.flickrviewer.R
 import com.mg.flickrviewer.api.FlickrPhoto
 import com.mg.flickrviewer.databinding.PhotoListItemBinding
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class PhotosDataAdapter : PagingDataAdapter<FlickrPhoto, RecyclerView.ViewHolder>(PHOTO_COMPARATOR) {
+class PhotosDataAdapter :
+    PagingDataAdapter<FlickrPhoto, RecyclerView.ViewHolder>(PHOTO_COMPARATOR) {
 
     companion object {
         private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<FlickrPhoto>() {
@@ -35,7 +39,19 @@ class PhotosDataAdapter : PagingDataAdapter<FlickrPhoto, RecyclerView.ViewHolder
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FlickrPhoto?) {
             binding.run {
-                Picasso.get().load(item?.url_sq).into(imageView)
+                imageProgressBar.isVisible = true
+                Picasso.get()
+                    .load(item?.url_sq)
+                    .error(R.drawable.ic_baseline_error_outline_24)
+                    .into(imageView, object : Callback {
+                        override fun onSuccess() {
+                            imageProgressBar.isVisible = false
+                        }
+
+                        override fun onError(e: Exception?) {
+                            imageProgressBar.isVisible = false
+                        }
+                    })
             }
         }
 

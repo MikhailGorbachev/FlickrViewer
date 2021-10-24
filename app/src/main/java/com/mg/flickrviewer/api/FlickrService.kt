@@ -19,8 +19,10 @@ interface FlickrService {
 
     @GET("services/rest/?method=flickr.photos.search&nojsoncallback=1&format=json")
     suspend fun search(
+        @Query("page") page: Int,
+        @Query("per_page") limit: Int,
+        @Query("text") text: String,
         @Query("api_key") apiKey: String = BuildConfig.FLICKR_KEY,
-        @Query("text") text: String? = null,
         @Query("extras") extras: String = URLS
-    ): Response
+    ): RecentPhotosResponse
 }

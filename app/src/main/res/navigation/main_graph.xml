@@ -6,6 +6,7 @@
 
     <fragment
         android:id="@+id/recent_photo_fragment"
+        android:label="@string/recent_photos"
         android:name="com.mg.flickrviewer.ui.list.RecentPhotosFragment">
 
         <action
