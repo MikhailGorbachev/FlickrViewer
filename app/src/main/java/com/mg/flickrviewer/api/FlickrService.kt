@@ -1,11 +1,10 @@
 package com.mg.flickrviewer.api
 
 import com.mg.flickrviewer.BuildConfig
-import okhttp3.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val URLS = "url_sq, url_t, url_s, url_q, url_m, url_n, url_z, url_c, url_l, url_o"
+const val URLS = "url_sq, url_s, url_q, url_t, url_m, url_n, url_w, url_b, url_c, url_z"
 
 interface FlickrService {
 

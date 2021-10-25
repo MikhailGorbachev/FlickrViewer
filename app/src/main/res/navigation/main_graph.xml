@@ -6,8 +6,8 @@
 
     <fragment
         android:id="@+id/recent_photo_fragment"
-        android:label="@string/recent_photos"
-        android:name="com.mg.flickrviewer.ui.list.RecentPhotosFragment">
+        android:name="com.mg.flickrviewer.ui.list.RecentPhotosFragment"
+        android:label="@string/recent_photos">
 
         <action
             android:id="@+id/photo_details_action"
@@ -16,6 +16,11 @@
 
     <fragment
         android:id="@+id/photo_details_fragment"
-        android:name="com.mg.flickrviewer.ui.details.PhotoDetailsFragment" />
+        android:label="@string/photo_details"
+        android:name="com.mg.flickrviewer.ui.details.PhotoDetailsFragment">
+        <argument
+            android:name="flickrPhoto"
+            app:argType="com.mg.flickrviewer.api.FlickrPhoto" />
+    </fragment>
 
 </navigation>

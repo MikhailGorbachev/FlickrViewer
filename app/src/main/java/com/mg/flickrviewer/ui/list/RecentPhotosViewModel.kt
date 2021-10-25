@@ -10,6 +10,10 @@ class RecentPhotosViewModel(private val flickrRepository: FlickrRepository) : Vi
 
     private val searchText = MutableLiveData<String>()
 
+    init {
+        search("")
+    }
+
     val photoList: LiveData<PagingData<FlickrPhoto>> = searchText.switchMap { query ->
         flickrRepository.searchPhotosFlow(query).cachedIn(viewModelScope)
     }

@@ -30,7 +30,9 @@ class RecentPhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listAdapter = PhotosDataAdapter()
+        val listAdapter = PhotosDataAdapter {
+            openDetails(it)
+        }
 
         binding?.run {
             val searchView = toolbar.menu.findItem(R.id.search_item).actionView as? SearchView
@@ -69,8 +71,6 @@ class RecentPhotosFragment : Fragment() {
             swiperefresh.setOnRefreshListener {
                 listAdapter.refresh()
             }
-
-            viewModel.search("")
 
             viewModel.photoList.observe(viewLifecycleOwner) {
                 swiperefresh.isRefreshing = false

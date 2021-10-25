@@ -8,8 +8,8 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="10dp">
+        android:layout_margin="@dimen/single_margin"
+        app:cardCornerRadius="@dimen/default_radius">
 
         <ImageView
             android:id="@+id/image_view"

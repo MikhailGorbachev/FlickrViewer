@@ -12,7 +12,7 @@ import com.mg.flickrviewer.databinding.PhotoListItemBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class PhotosDataAdapter :
+class PhotosDataAdapter(private val click: (FlickrPhoto) -> Unit) :
     PagingDataAdapter<FlickrPhoto, RecyclerView.ViewHolder>(PHOTO_COMPARATOR) {
 
     companion object {
@@ -26,7 +26,8 @@ class PhotosDataAdapter :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? FlickrPhotoViewHolder)?.bind(item = getItem(position))
+        val item = getItem(position)
+        (holder as? FlickrPhotoViewHolder)?.bind(item, click)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -37,11 +38,16 @@ class PhotosDataAdapter :
 
     class FlickrPhotoViewHolder(private val binding: PhotoListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: FlickrPhoto?) {
+        fun bind(item: FlickrPhoto?, click: (FlickrPhoto) -> Unit) {
             binding.run {
                 imageProgressBar.isVisible = true
+                imageView.setOnClickListener {
+                    item?.let {
+                        click(it)
+                    }
+                }
                 Picasso.get()
-                    .load(item?.url_sq)
+                    .load(item?.getThumbnailUrl())
                     .error(R.drawable.ic_baseline_error_outline_24)
                     .into(imageView, object : Callback {
                         override fun onSuccess() {
