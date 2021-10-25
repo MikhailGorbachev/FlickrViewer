@@ -7,4 +7,5 @@
     <string name="retry">Retry</string>
     <string name="default_error">Something went wrong</string>
     <string name="loading_started">Loading started</string>
+    <string name="url_absent_error">Loading fail. There is no image link</string>
 </resources>

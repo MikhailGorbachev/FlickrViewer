@@ -50,14 +50,20 @@ class PhotoDetailsFragment : Fragment() {
 
                 ContextCompat.getSystemService(requireContext(), DownloadManager::class.java)
                     ?.let { dm ->
-                        val fileUri = Uri.parse(args.flickrPhoto.getUrl())
-                        val request = DownloadManager.Request(fileUri)
-                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                        val urlStr = args.flickrPhoto.getUrl()
+                        if (urlStr.isNullOrBlank()) {
+                            Snackbar.make(view, R.string.url_absent_error, Snackbar.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            val fileUri = Uri.parse(urlStr)
+                            val request = DownloadManager.Request(fileUri)
+                                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                            dm.enqueue(request)
 
-                        dm.enqueue(request)
+                            Snackbar.make(view, R.string.loading_started, Snackbar.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-
-                Snackbar.make(view, R.string.loading_started, Snackbar.LENGTH_SHORT).show()
                 true
             }
 
