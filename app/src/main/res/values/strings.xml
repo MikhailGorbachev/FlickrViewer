@@ -3,6 +3,8 @@
 
     <string name="search">Search</string>
     <string name="recent_photos">Recent photos</string>
+    <string name="photo_details">Photo details</string>
     <string name="retry">Retry</string>
     <string name="default_error">Something went wrong</string>
+    <string name="loading_started">Loading started</string>
 </resources>
