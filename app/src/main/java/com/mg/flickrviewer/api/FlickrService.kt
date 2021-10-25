@@ -14,7 +14,7 @@ interface FlickrService {
         @Query("per_page") limit: Int,
         @Query("api_key") apiKey: String = BuildConfig.FLICKR_KEY,
         @Query("extras") extras: String = URLS
-    ): RecentPhotosResponse
+    ): PhotosResponse
 
     @GET("services/rest/?method=flickr.photos.search&nojsoncallback=1&format=json")
     suspend fun search(
@@ -23,5 +23,5 @@ interface FlickrService {
         @Query("text") text: String,
         @Query("api_key") apiKey: String = BuildConfig.FLICKR_KEY,
         @Query("extras") extras: String = URLS
-    ): RecentPhotosResponse
+    ): PhotosResponse
 }

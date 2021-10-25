@@ -22,6 +22,7 @@ class FlickrRepository(private val flickrService: FlickrService) {
     ): LiveData<PagingData<FlickrPhoto>> {
         return Pager(
             config = pagingConfig,
+            initialKey = FIRST_PAGE_INDEX,
             pagingSourceFactory = { PhotoPagingSource(flickrService, searchText) }
         ).liveData
     }

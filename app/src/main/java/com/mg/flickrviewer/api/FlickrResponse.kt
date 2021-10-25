@@ -23,12 +23,12 @@ data class FlickrPhoto(
 
     ) : Parcelable {
 
-    fun getThumbnailUrl() = url_t ?: url_q ?: url_s ?: url_sq.orEmpty()
+    fun getThumbnailUrl() = url_t ?: url_q ?: url_s ?: url_sq
 
-    fun getUrl() = url_b ?: url_c ?: url_z.orEmpty()
+    fun getUrl() = url_b ?: url_c ?: url_z ?: getThumbnailUrl()
 }
 
-data class RecentPhotosResponse(
+data class PhotosResponse(
     val photos: PaginationResponse
 )
 
